@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+backend/db.sqlite3
+backend/.env
+
+# Models (too large for Git)
+backend/models/
+
+# Node.js
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+
+# Packaging
+*.zip
+*.tar.gz
+*.rar
+
+# OS
+.DS_Store
+Thumbs.db
