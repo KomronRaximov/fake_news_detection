@@ -22,6 +22,3 @@ This project is a web application for detecting fake news using deep learning mo
 1. Go to `frontend/` directory.
 2. Install dependencies: `npm install`.
 3. Start development server: `npm run dev`.
-
-## Authors
-- Komron Raximov
