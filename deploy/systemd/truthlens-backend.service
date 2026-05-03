@@ -1,0 +1,15 @@
+[Unit]
+Description=TruthLens Django backend
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/fake_news_detection/backend
+Environment="PATH=/var/www/fake_news_detection/backend/.venv/bin"
+ExecStart=/var/www/fake_news_detection/backend/.venv/bin/gunicorn --workers 2 --timeout 180 --bind 127.0.0.1:8001 core.wsgi:application
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -154,8 +154,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # Models
-ARTICLE_MODEL_PATH = os.path.join(BASE_DIR, 'models', 'article_model')
-LIAR_MODEL_PATH = os.path.join(BASE_DIR, 'models', 'liar_model')
+ARTICLE_MODEL_PATH = os.path.join(BASE_DIR, 'models', 'best_model')
+LIAR_MODEL_PATH = os.path.join(BASE_DIR, 'models', 'best_liar_model')
 
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY', '')
 

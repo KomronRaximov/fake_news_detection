@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from importlib.util import find_spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
+
+if find_spec('social_django'):
+    urlpatterns.append(path('social-auth/', include('social_django.urls', namespace='social')))

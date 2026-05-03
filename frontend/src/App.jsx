@@ -5,7 +5,7 @@ import Stats from './components/Stats';
 import { AuthPortal, AdminDashboard, UserDashboard } from './components/Admin';
 import { Newspaper, History as HistoryIcon, LayoutDashboard, BrainCircuit, Sparkles, User as UserIcon, Loader2, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import api from './api';
+import api, { clearAuthTokens } from './api';
 
 function App() {
   const [activeTab, setActiveTab] = useState('predictor');
@@ -39,6 +39,9 @@ function App() {
           setUsername(res.data.username);
         }
       } catch (err) {
+        if (err.response?.status === 401) {
+          clearAuthTokens();
+        }
         console.error('Auth check failed', err);
       } finally {
         setIsAuthChecking(false);
@@ -49,8 +52,7 @@ function App() {
   }, []);
 
   const handleLogout = async () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    clearAuthTokens();
     setIsAuthenticated(false);
     setIsStaff(false);
     setUsername('');

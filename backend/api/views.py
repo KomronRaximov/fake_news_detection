@@ -38,6 +38,7 @@ from .models import EmailVerification
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
+@authentication_classes([])
 def register_view(request):
     username = request.data.get('username')
     email = request.data.get('email')
@@ -62,6 +63,7 @@ def register_view(request):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+@authentication_classes([])
 def verify_email_view(request, token):
     try:
         verification = EmailVerification.objects.get(token=token)
@@ -75,6 +77,7 @@ def verify_email_view(request, token):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
+@authentication_classes([])
 def login_view(request):
     identifier = request.data.get('username') or '' # can be username or email
     password = request.data.get('password')

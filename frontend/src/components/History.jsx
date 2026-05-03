@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import api from '../api';
 import { Clock, ExternalLink, ChevronLeft, ChevronRight, Calendar, Hash, ShieldCheck, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ const History = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
-    const fetchHistory = async () => {
+    const fetchHistory = useCallback(async () => {
         setLoading(true);
         try {
             const response = await api.get(`history/?page=${page}`);
@@ -18,11 +18,11 @@ const History = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [page]);
 
     useEffect(() => {
         fetchHistory();
-    }, [page]);
+    }, [fetchHistory]);
 
     if (loading && !data) return (
         <div className="flex flex-col items-center justify-center p-24 space-y-4">

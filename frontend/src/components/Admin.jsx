@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api';
+import api, { clearAuthTokens } from '../api';
 import { LogIn, User, Shield, Lock, Loader2, LogOut, CheckCircle, Database, Users, Globe, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -21,6 +21,9 @@ const AuthPortal = ({ onAuthSuccess }) => {
         const payload = isLogin ? { username, password } : { username, email, password };
 
         try {
+            if (isLogin) {
+                clearAuthTokens();
+            }
             const res = await api.post(endpoint, payload);
             if (res.data.success) {
                 if (isLogin) {
@@ -37,7 +40,7 @@ const AuthPortal = ({ onAuthSuccess }) => {
                 }
             }
         } catch (err) {
-            setError(err.response?.data?.error || `${isLogin ? 'Login' : 'Registration'} failed.`);
+            setError(err.response?.data?.error || err.response?.data?.detail || `${isLogin ? 'Login' : 'Registration'} failed.`);
         } finally {
             setLoading(false);
         }
